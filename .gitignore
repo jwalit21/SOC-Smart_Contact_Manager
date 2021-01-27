@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+/Smart_Contact_Manager/.vs
+/Smart_Contact_Manager/.vs/*
+
 # User-specific files
 *.rsuser
 *.suo
