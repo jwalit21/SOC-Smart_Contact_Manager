@@ -11,13 +11,21 @@ namespace Host_Service
     {
         static void Main(string[] args)
         {
-            Type t = typeof(Backend_Service.AccountService);
-            Uri http = new Uri("http://localhost:8080/Account_Service");
-            ServiceHost host = new ServiceHost(t, http);
-            host.Open();
-            Console.WriteLine("Published");
-            Console.ReadLine();
-            host.Close();
+            using (ServiceHost accountServiceHost = new ServiceHost(typeof(Backend_Service.AccountService)))
+            using (ServiceHost contactServiceHost = new ServiceHost(typeof(Backend_Service.ContactService)))
+            using (ServiceHost groupServiceHost = new ServiceHost(typeof(Backend_Service.GroupService)))
+            {
+                accountServiceHost.Open();
+                Console.WriteLine("Account Service Published");
+
+                contactServiceHost.Open();
+                Console.WriteLine("Contact Service Published");
+
+                groupServiceHost.Open();
+                Console.WriteLine("Group Service Published");
+
+                Console.ReadLine();
+            }
         }
     }
 }
