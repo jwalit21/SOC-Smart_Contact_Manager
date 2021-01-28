@@ -33,10 +33,9 @@ namespace Backend_Service
             cmd.Parameters.Add(param2);
             conn.Open();
             SqlDataReader sqlDataReader = cmd.ExecuteReader();
-            User fetchedUser = null;
+            User fetchedUser = new User();
             while (sqlDataReader.Read())
             {
-                fetchedUser = new User();
                 fetchedUser.UserId = sqlDataReader.GetInt32(0);
                 fetchedUser.Email = sqlDataReader.GetString(1);
                 fetchedUser.Name = sqlDataReader.GetString(2);
@@ -52,7 +51,7 @@ namespace Backend_Service
             throw new NotImplementedException();
         }
 
-        public bool Register(User user)
+        public User Register(User user)
         {
             dbInit();
             cmd.CommandText = "Insert into [Users] values(@Email,@Name,@Password,@PhoneNumber)";
@@ -69,10 +68,10 @@ namespace Backend_Service
             catch (System.Data.SqlClient.SqlException e)
             {
                 conn.Close();
-                return false;
+                return new User();
             }
             conn.Close();
-            return true;
+            return user;
         }
     }
 }
