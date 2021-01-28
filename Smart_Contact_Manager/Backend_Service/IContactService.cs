@@ -13,7 +13,7 @@ namespace Backend_Service
     public interface IContactService
     {
         [OperationContract]
-        List<Contact> GetContacts();
+        List<Contact> GetContacts(int userId);
 
         [OperationContract]
         Contact AddContact(Contact contact);

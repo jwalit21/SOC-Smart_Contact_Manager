@@ -28,10 +28,11 @@ namespace Backend_Service
             cmd.Connection = conn;
         }
 
-        public List<Contact> GetContacts()
+        public List<Contact> GetContacts(int userId)
         {
             dbInit();
-            cmd.CommandText = "SELECT * FROM [Contacts]";
+            cmd.CommandText = "SELECT * FROM [Contacts] WHERE UserId=@UserId";
+            cmd.Parameters.AddWithValue("@UserId", userId);
             conn.Open();
             SqlDataReader sqlDataReader = cmd.ExecuteReader();
             List<Contact> fetchedContacts = new List<Contact>();
