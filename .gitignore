@@ -6,6 +6,9 @@
 /Smart_Contact_Manager/.vs
 /Smart_Contact_Manager/.vs/*
 
+# cache  files
+/Smart_Contact_Manager/Backend_Service/obj/Debug/Backend_Service.csprojAssemblyReference.cache
+
 # User-specific files
 *.rsuser
 *.suo
