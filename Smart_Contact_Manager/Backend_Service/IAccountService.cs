@@ -13,12 +13,9 @@ namespace Backend_Service
     public interface IAccountService
     {
         [OperationContract]
-        bool Register(User user);
+        User Register(User user);
 
         [OperationContract]
         User Login(User user);
-
-        [OperationContract]
-        void Logout(User user);
     }
 }
