@@ -198,5 +198,18 @@ namespace Backend_Service
                 return new GroupContact();
             return groupContact;
         }
+
+        public GroupContact DeleteGroupContactByGroupId(GroupContact groupContact)
+        {
+            dbInit();
+            cmd.CommandText = "DELETE FROM [Group_Contacts] WHERE GroupId=@GroupId";
+            cmd.Parameters.AddWithValue("@GroupId", groupContact.GroupId);
+            conn.Open();
+            int rowDeleted = cmd.ExecuteNonQuery();
+            conn.Close();
+            if (rowDeleted == 0)
+                return new GroupContact();
+            return groupContact;
+        }
     }
 }

@@ -26,5 +26,11 @@ namespace Backend_Service
         
         [OperationContract]
         Contact DeleteContact(Contact contact);
+
+        [OperationContract]
+        bool UploadToTempFolder(byte[] pFileBytes, string pFileName);
+
+        [OperationContract]
+        byte[] GetFileFromFolder(string pFileName);
     }
 }
