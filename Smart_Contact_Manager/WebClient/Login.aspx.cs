@@ -23,7 +23,7 @@ namespace WebClient
             WebClient.AccountServiceReference.User fetchedUser = ((AccountServiceReference.IAccountService)proxy).Login(user);
             if (fetchedUser.UserId == 0)
             {
-                ErrorMessage.Text = "Invalid Login";
+                ErrorMessage.Text = "Invalid Email or Password!!!";
                 return;
             }
             Session["UserID"] = fetchedUser.UserId;

@@ -23,22 +23,12 @@ CREATE TABLE [dbo].[Contacts] (
 
 
 CREATE TABLE [dbo].[Groups] (
-    [GroupId]     INT            NOT NULL,
-    [UserId]      INT            NOT NULL,
-    [Name]        NVARCHAR (50)  NOT NULL,
-    [Description] NVARCHAR (MAX) NULL,
-    PRIMARY KEY CLUSTERED ([GroupId] ASC),
-    CONSTRAINT [FK_Groups_ToUsers] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([UserId])
-);
-
-CREATE TABLE [dbo].[Groups] (
     [GroupId]     INT            IDENTITY (1, 1) NOT NULL,
     [UserId]      INT            NOT NULL,
-    [Name]        NVARCHAR (50)  NOT NULL,
+    [Name]        NVARCHAR (50)  NOT NULL ,
     [Description] NVARCHAR (MAX) NULL,
     PRIMARY KEY CLUSTERED ([GroupId] ASC),
-    CONSTRAINT [FK_Groups_ToUsers] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([UserId]) ON DELETE CASCADE
+    CONSTRAINT [FK_Groups_ToUsers] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([UserId]) ON DELETE CASCADE, 
+    UNIQUE NONCLUSTERED ([Name] ASC)
 );
-
-
 

@@ -37,10 +37,12 @@ namespace Backend_Service
             {
                 cmd.ExecuteNonQuery();
             }
-            catch (System.Data.SqlClient.SqlException e) 
+            catch (System.Data.SqlClient.SqlException e)
             {
                 conn.Close();
-                return new Group();
+                var grp = new Group();
+                grp.GroupId = -1;
+                return grp;
             }
 
             newGroup = group;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="inSXO7dGKsDiIZ/aMUoLtZwoICtJWNKf3FiYWK0x2Zo=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="PlfR+uMV9FfY4EE89V30/E1pyfyPuVKMxx+2o3izlP8=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IGroupService">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IGroupService" contract="GroupServiceReference.IGroupService" bindingType="basicHttpBinding" address="http://localhost:8082/GroupService/Group_Service" bindingConfiguration="BasicHttpBinding_IGroupService">
+    <endpoint name="BasicHttpBinding_IGroupService" contract="GroupServiceReference.IGroupService" bindingType="basicHttpBinding" address="http://localhost:8082/GroupService" bindingConfiguration="BasicHttpBinding_IGroupService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:8082/GroupService/Group_Service</serializedValue>
+          <serializedValue>http://localhost:8082/GroupService</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
