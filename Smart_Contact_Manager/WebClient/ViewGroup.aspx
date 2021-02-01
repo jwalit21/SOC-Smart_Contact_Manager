@@ -2,12 +2,7 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent">
     <br />
-    <h3 class="text-center">
-        <asp:Label runat="server" Text="" CssClass="text-dark font-weight-bold" ID="GroupName"></asp:Label></h3>
-    <br />
-    <h4 class="text-center">
-        <asp:Label Text="" runat="server" CssClass="text-dark" ID="GrpDesc"></asp:Label>
-    </h4>
+
     <div class="row">
         <div class="col-12 float-left">
             <asp:HyperLink CssClass="btn btn-primary" ID="AddContactLink" runat="server">Add New Contacts</asp:HyperLink>
@@ -18,7 +13,14 @@
     <br />
     <div class="card">
         <div class="card-body">
-
+            <div class="card-header">
+                <h3 class="text-center">
+                    <asp:Label runat="server" Text="" CssClass="text-dark font-weight-bold" ID="GroupName"></asp:Label></h3>
+                <br />
+                <h4 class="text-center">
+                    <asp:Label Text="" runat="server" CssClass="text-dark" ID="GrpDesc"></asp:Label>
+                </h4>
+            </div>
             <br />
             <div class="row">
                 <div class="table mt-2 table-responsive" role="grid">

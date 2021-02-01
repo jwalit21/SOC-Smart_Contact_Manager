@@ -21,6 +21,14 @@ namespace WebClient
                     this.Context.Items.Remove("SuccessMessage");
                     ErrorMessage.Visible = false;
                 }
+                string Error_Message = (string)this.Context.Items["ErrorMessage"];
+                if (Error_Message != "")
+                {
+                    ErrorMessage.Visible = true;
+                    ErrorMessage.Text = Error_Message;
+                    this.Context.Items.Remove("ErrorMessage");
+                    SuccessMessage.Visible = false;
+                }
             }
         }
 
@@ -39,9 +47,7 @@ namespace WebClient
                 return;
             }
             Session["UserID"] = fetchedUser.UserId;
-            SuccessMessage.Visible = false;
-            ErrorMessage.Visible = true;
-            ErrorMessage.Text = Session["UserID"].ToString();
+            Response.Redirect("~/Dashboard.aspx");
         }
     }
 }

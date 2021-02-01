@@ -15,7 +15,8 @@ namespace WebClient
         {
             if (Session["UserID"] == null)
             {
-                Response.Redirect("~/Login.aspx");
+                this.Context.Items.Add("ErrorMessage", "Access Denied! Please Login");
+                Server.Transfer("~/Login.aspx");
             }
             int GroupId = Int32.Parse(Request.QueryString["GroupId"]);
             var UserId = Int32.Parse(Session["UserId"].ToString());
@@ -28,7 +29,7 @@ namespace WebClient
             var fetchedGroup = ((IGroupService)proxy).GetGroup(group);
             if (fetchedGroup.UserId != UserId)
             {
-                Response.Redirect("~/Login.aspx");
+                Response.Redirect("~/AccessDenied.aspx");
             }
             GroupName.Text = fetchedGroup.Name;
             GrpDesc.Text = fetchedGroup.Description;
@@ -48,7 +49,7 @@ namespace WebClient
                 var fetchedContact = ((IContactService)contactProxy).GetContact(contact);
                 ContactId.Text = fetchedContact.Name;
                 PhoneNumber.Text = fetchedContact.PhoneNumber;
-                button.Text = ("<a class='btn btn-primary' href=''>View Contact</a>");
+                button.Text = ("<a class='btn btn-primary' href='/ViewContact.aspx?ContactId=" + contact.ContactId.ToString() + "; >View Contact</a>");
                 removeButton.Text = "<a class='btn btn-danger' onclick='delete'>Delete</a>";
                 TableRow row = new TableRow();
                 row.Cells.Add(seqNo);

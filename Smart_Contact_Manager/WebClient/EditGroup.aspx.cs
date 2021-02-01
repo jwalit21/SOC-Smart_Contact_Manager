@@ -19,7 +19,8 @@ namespace WebClient
             { 
                 if (Session["UserID"] == null)
                 {
-                    Response.Redirect("~/Login.aspx");
+                    this.Context.Items.Add("ErrorMessage", "Access Denied! Please Login");
+                    Server.Transfer("~/Login.aspx");
                 }
                 grpProxy = new GroupServiceClient();
                 GroupId = Int32.Parse(Request.QueryString["GroupId"]);
@@ -31,7 +32,7 @@ namespace WebClient
                 var fetchedGroup = ((IGroupService)grpProxy).GetGroup(group);
                 if (fetchedGroup.UserId != UserId)
                 {
-                    Response.Redirect("~/Login.aspx");
+                    Response.Redirect("~/AccessDenied.aspx");
                 }
                 Name.Text = fetchedGroup.Name;
                 Description.Text = fetchedGroup.Description;

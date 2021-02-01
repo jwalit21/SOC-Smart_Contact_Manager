@@ -15,24 +15,6 @@ namespace WebClient
     {
 
         /// <summary>
-        /// GroupName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label GroupName;
-
-        /// <summary>
-        /// GrpDesc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label GrpDesc;
-
-        /// <summary>
         /// AddContactLink control.
         /// </summary>
         /// <remarks>
@@ -49,6 +31,24 @@ namespace WebClient
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink DeleteGroupLink;
+
+        /// <summary>
+        /// GroupName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label GroupName;
+
+        /// <summary>
+        /// GrpDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label GrpDesc;
 
         /// <summary>
         /// GroupContacList control.

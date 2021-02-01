@@ -14,7 +14,8 @@ namespace WebClient
         {
             if (Session["UserID"] == null)
             {
-                Response.Redirect("~/Login.aspx");
+                this.Context.Items.Add("ErrorMessage", "Access Denied! Please Login");
+                Server.Transfer("~/Login.aspx");
             }
             var UserId = Int32.Parse(Session["UserId"].ToString());
             var proxy = new GroupServiceClient();

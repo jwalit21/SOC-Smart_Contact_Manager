@@ -20,6 +20,18 @@
     <wsdl:part name="ContactId" element="tns:ContactId" />
     <wsdl:part name="UserId" element="tns:UserId" />
   </wsdl:message>
+  <wsdl:message name="IContactService_UploadToTempFolder_InputMessage">
+    <wsdl:part name="parameters" element="tns:UploadToTempFolder" />
+  </wsdl:message>
+  <wsdl:message name="IContactService_UploadToTempFolder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UploadToTempFolderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IContactService_GetFileFromFolder_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileFromFolder" />
+  </wsdl:message>
+  <wsdl:message name="IContactService_GetFileFromFolder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileFromFolderResponse" />
+  </wsdl:message>
   <wsdl:portType name="IContactService">
     <wsdl:operation name="GetContacts">
       <wsdl:input wsaw:Action="http://tempuri.org/IContactService/GetContacts" message="tns:IContactService_GetContacts_InputMessage" />
@@ -40,6 +52,14 @@
     <wsdl:operation name="DeleteContact">
       <wsdl:input wsaw:Action="http://tempuri.org/IContactService/DeleteContact" name="Contact" message="tns:Contact" />
       <wsdl:output wsaw:Action="http://tempuri.org/IContactService/DeleteContactResponse" name="Contact" message="tns:Contact" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadToTempFolder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IContactService/UploadToTempFolder" message="tns:IContactService_UploadToTempFolder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IContactService/UploadToTempFolderResponse" message="tns:IContactService_UploadToTempFolder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileFromFolder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IContactService/GetFileFromFolder" message="tns:IContactService_GetFileFromFolder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IContactService/GetFileFromFolderResponse" message="tns:IContactService_GetFileFromFolder_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IContactService" type="tns:IContactService">
@@ -102,6 +122,24 @@
       <wsdl:output name="Contact">
         <soap:header message="tns:Contact_Headers" part="ContactId" use="literal" />
         <soap:header message="tns:Contact_Headers" part="UserId" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadToTempFolder">
+      <soap:operation soapAction="http://tempuri.org/IContactService/UploadToTempFolder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileFromFolder">
+      <soap:operation soapAction="http://tempuri.org/IContactService/GetFileFromFolder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

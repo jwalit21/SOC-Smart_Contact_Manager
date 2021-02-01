@@ -11,17 +11,8 @@ namespace WebClient
 {
 
 
-    public partial class Login
+    public partial class EditContact
     {
-
-        /// <summary>
-        /// SuccessMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SuccessMessage;
 
         /// <summary>
         /// ErrorMessage control.
@@ -33,6 +24,24 @@ namespace WebClient
         protected global::System.Web.UI.WebControls.Label ErrorMessage;
 
         /// <summary>
+        /// Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Name;
+
+        /// <summary>
+        /// PhoneNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PhoneNumber;
+
+        /// <summary>
         /// Email control.
         /// </summary>
         /// <remarks>
@@ -42,13 +51,13 @@ namespace WebClient
         protected global::System.Web.UI.WebControls.TextBox Email;
 
         /// <summary>
-        /// Password control.
+        /// Description control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Password;
+        protected global::System.Web.UI.WebControls.TextBox Description;
 
         /// <summary>
         /// SubmitButton control.

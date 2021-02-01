@@ -11,25 +11,34 @@ namespace WebClient
 {
 
 
-    public partial class GroupList
+    public partial class DeleteContact
     {
 
         /// <summary>
-        /// CreateContactLink control.
+        /// ContactData control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink CreateContactLink;
+        protected global::System.Web.UI.WebControls.Label ContactData;
 
         /// <summary>
-        /// GroupsList control.
+        /// SubmitButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table GroupsList;
+        protected global::System.Web.UI.WebControls.Button SubmitButton;
+
+        /// <summary>
+        /// CancelButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CancelButton;
     }
 }

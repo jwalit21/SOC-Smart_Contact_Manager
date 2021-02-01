@@ -11,7 +11,7 @@ namespace WebClient
 {
 
 
-    public partial class GroupList
+    public partial class ContactList
     {
 
         /// <summary>
@@ -24,12 +24,12 @@ namespace WebClient
         protected global::System.Web.UI.WebControls.HyperLink CreateContactLink;
 
         /// <summary>
-        /// GroupsList control.
+        /// ContactsList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table GroupsList;
+        protected global::System.Web.UI.WebControls.Table ContactsList;
     }
 }

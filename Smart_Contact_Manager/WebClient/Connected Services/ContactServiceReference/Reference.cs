@@ -191,6 +191,18 @@ namespace WebClient.ContactServiceReference {
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContactService/DeleteContact", ReplyAction="http://tempuri.org/IContactService/DeleteContactResponse")]
         System.Threading.Tasks.Task<WebClient.ContactServiceReference.Contact1> DeleteContactAsync(WebClient.ContactServiceReference.Contact1 request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContactService/UploadToTempFolder", ReplyAction="http://tempuri.org/IContactService/UploadToTempFolderResponse")]
+        bool UploadToTempFolder(byte[] pFileBytes, string pFileName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContactService/UploadToTempFolder", ReplyAction="http://tempuri.org/IContactService/UploadToTempFolderResponse")]
+        System.Threading.Tasks.Task<bool> UploadToTempFolderAsync(byte[] pFileBytes, string pFileName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContactService/GetFileFromFolder", ReplyAction="http://tempuri.org/IContactService/GetFileFromFolderResponse")]
+        byte[] GetFileFromFolder(string pFileName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContactService/GetFileFromFolder", ReplyAction="http://tempuri.org/IContactService/GetFileFromFolderResponse")]
+        System.Threading.Tasks.Task<byte[]> GetFileFromFolderAsync(string pFileName);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -378,6 +390,22 @@ namespace WebClient.ContactServiceReference {
         
         public System.Threading.Tasks.Task<WebClient.ContactServiceReference.Contact1> DeleteContactAsync(WebClient.ContactServiceReference.Contact1 request) {
             return base.Channel.DeleteContactAsync(request);
+        }
+        
+        public bool UploadToTempFolder(byte[] pFileBytes, string pFileName) {
+            return base.Channel.UploadToTempFolder(pFileBytes, pFileName);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UploadToTempFolderAsync(byte[] pFileBytes, string pFileName) {
+            return base.Channel.UploadToTempFolderAsync(pFileBytes, pFileName);
+        }
+        
+        public byte[] GetFileFromFolder(string pFileName) {
+            return base.Channel.GetFileFromFolder(pFileName);
+        }
+        
+        public System.Threading.Tasks.Task<byte[]> GetFileFromFolderAsync(string pFileName) {
+            return base.Channel.GetFileFromFolderAsync(pFileName);
         }
     }
 }

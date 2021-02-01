@@ -71,6 +71,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGroupService/DeleteGroupContactByContactId" name="GroupContact" message="tns:GroupContact" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGroupService/DeleteGroupContactByContactIdResponse" name="GroupContact" message="tns:GroupContact" />
     </wsdl:operation>
+    <wsdl:operation name="DeleteGroupContactByGroupId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGroupService/DeleteGroupContactByGroupId" name="GroupContact" message="tns:GroupContact" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGroupService/DeleteGroupContactByGroupIdResponse" name="GroupContact" message="tns:GroupContact" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGroupService" type="tns:IGroupService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -176,6 +180,21 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteGroupContactByContactId">
       <soap:operation soapAction="http://tempuri.org/IGroupService/DeleteGroupContactByContactId" style="document" />
+      <wsdl:input name="GroupContact">
+        <soap:header message="tns:GroupContact_Headers" part="ContactId" use="literal" />
+        <soap:header message="tns:GroupContact_Headers" part="GroupId" use="literal" />
+        <soap:header message="tns:GroupContact_Headers" part="Id" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GroupContact">
+        <soap:header message="tns:GroupContact_Headers" part="ContactId" use="literal" />
+        <soap:header message="tns:GroupContact_Headers" part="GroupId" use="literal" />
+        <soap:header message="tns:GroupContact_Headers" part="Id" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroupContactByGroupId">
+      <soap:operation soapAction="http://tempuri.org/IGroupService/DeleteGroupContactByGroupId" style="document" />
       <wsdl:input name="GroupContact">
         <soap:header message="tns:GroupContact_Headers" part="ContactId" use="literal" />
         <soap:header message="tns:GroupContact_Headers" part="GroupId" use="literal" />
