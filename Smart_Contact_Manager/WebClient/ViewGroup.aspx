@@ -8,20 +8,17 @@
     <h4 class="text-center">
         <asp:Label Text="" runat="server" CssClass="text-dark" ID="GrpDesc"></asp:Label>
     </h4>
-    <br />
     <div class="row">
-                <div class="col-sm-4">
-                    <a href="#" class="btn btn-primary">Add New Contacts</a>
-                </div>
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
-                    <a href="#" class="btn btn-danger">Delete This Group</a>
-                </div>
-            </div>  
+        <div class="col-12 float-left">
+            <asp:HyperLink CssClass="btn btn-primary" ID="AddContactLink" runat="server">Add New Contacts</asp:HyperLink>
+
+            <asp:HyperLink CssClass="btn btn-danger" ID="DeleteGroupLink" runat="server">Delete This Group</asp:HyperLink>
+        </div>
+    </div>
     <br />
     <div class="card">
         <div class="card-body">
-            
+
             <br />
             <div class="row">
                 <div class="table mt-2 table-responsive" role="grid">
@@ -30,6 +27,7 @@
                             <asp:TableHeaderCell>#</asp:TableHeaderCell>
                             <asp:TableHeaderCell>Name</asp:TableHeaderCell>
                             <asp:TableHeaderCell>Contact Number</asp:TableHeaderCell>
+                            <asp:TableHeaderCell></asp:TableHeaderCell>
                             <asp:TableHeaderCell></asp:TableHeaderCell>
                         </asp:TableHeaderRow>
                     </asp:Table>

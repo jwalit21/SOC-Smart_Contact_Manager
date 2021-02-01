@@ -240,6 +240,13 @@ namespace WebClient.GroupServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGroupService/DeleteGroupContact", ReplyAction="http://tempuri.org/IGroupService/DeleteGroupContactResponse")]
         System.Threading.Tasks.Task<WebClient.GroupServiceReference.GroupContact1> DeleteGroupContactAsync(WebClient.GroupServiceReference.GroupContact1 request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (GroupContact) of message GroupContact does not match the default value (DeleteGroupContactByContactId)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGroupService/DeleteGroupContactByContactId", ReplyAction="http://tempuri.org/IGroupService/DeleteGroupContactByContactIdResponse")]
+        WebClient.GroupServiceReference.GroupContact1 DeleteGroupContactByContactId(WebClient.GroupServiceReference.GroupContact1 request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGroupService/DeleteGroupContactByContactId", ReplyAction="http://tempuri.org/IGroupService/DeleteGroupContactByContactIdResponse")]
+        System.Threading.Tasks.Task<WebClient.GroupServiceReference.GroupContact1> DeleteGroupContactByContactIdAsync(WebClient.GroupServiceReference.GroupContact1 request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -482,6 +489,35 @@ namespace WebClient.GroupServiceReference {
             inValue.GroupId = GroupId;
             inValue.Id = Id;
             return ((WebClient.GroupServiceReference.IGroupService)(this)).DeleteGroupContactAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        WebClient.GroupServiceReference.GroupContact1 WebClient.GroupServiceReference.IGroupService.DeleteGroupContactByContactId(WebClient.GroupServiceReference.GroupContact1 request) {
+            return base.Channel.DeleteGroupContactByContactId(request);
+        }
+        
+        public void DeleteGroupContactByContactId(ref int ContactId, ref int GroupId, ref int Id) {
+            WebClient.GroupServiceReference.GroupContact1 inValue = new WebClient.GroupServiceReference.GroupContact1();
+            inValue.ContactId = ContactId;
+            inValue.GroupId = GroupId;
+            inValue.Id = Id;
+            WebClient.GroupServiceReference.GroupContact1 retVal = ((WebClient.GroupServiceReference.IGroupService)(this)).DeleteGroupContactByContactId(inValue);
+            ContactId = retVal.ContactId;
+            GroupId = retVal.GroupId;
+            Id = retVal.Id;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WebClient.GroupServiceReference.GroupContact1> WebClient.GroupServiceReference.IGroupService.DeleteGroupContactByContactIdAsync(WebClient.GroupServiceReference.GroupContact1 request) {
+            return base.Channel.DeleteGroupContactByContactIdAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WebClient.GroupServiceReference.GroupContact1> DeleteGroupContactByContactIdAsync(int ContactId, int GroupId, int Id) {
+            WebClient.GroupServiceReference.GroupContact1 inValue = new WebClient.GroupServiceReference.GroupContact1();
+            inValue.ContactId = ContactId;
+            inValue.GroupId = GroupId;
+            inValue.Id = Id;
+            return ((WebClient.GroupServiceReference.IGroupService)(this)).DeleteGroupContactByContactIdAsync(inValue);
         }
     }
 }

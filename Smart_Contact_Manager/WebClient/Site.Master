@@ -75,12 +75,6 @@
         type="text/javascript"></script>
     <asp:ContentPlaceHolder ID="Scripts" runat="server">
         </asp:ContentPlaceHolder>
-    <script>
-        $(document).ready(function () {
-            $('*[id*=lstEmployee]').multiselect({
-                includeSelectAllOption: true
-            });
-        })
-    </script>
+    
 </body>
 </html>
