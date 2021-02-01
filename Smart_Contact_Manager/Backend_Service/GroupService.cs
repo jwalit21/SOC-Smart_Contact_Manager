@@ -66,8 +66,9 @@ namespace Backend_Service
         public Group GetGroup(Group group)
         {
             dbInit();
-            cmd.CommandText = "SELECT * FROM [Groups] WHERE GroupId=@GroupId";
+            cmd.CommandText = "SELECT * FROM [Groups] WHERE GroupId=@GroupId and UserId=@UserId";
             cmd.Parameters.AddWithValue("@GroupId", group.GroupId);
+            cmd.Parameters.AddWithValue("@UserId", group.UserId);
             conn.Open();
             SqlDataReader sqlDataReader = cmd.ExecuteReader();
             Group fetchedGroup = new Group();
@@ -109,16 +110,16 @@ namespace Backend_Service
         {
             dbInit();
             cmd.CommandText = "UPDATE [Groups] SET Name=@Name, Description=@Description WHERE GroupId=@GroupId";
-            cmd.Parameters.AddWithValue("@ContactId", group.GroupId);
             cmd.Parameters.AddWithValue("@Name", group.Name);
             cmd.Parameters.AddWithValue("@Description", group.Description);
-
+            cmd.Parameters.AddWithValue("@GroupId", group.GroupId);
+            
             conn.Open();
-            Group updatedGroup;
+            Group updatedGroup=new Group();
+            updatedGroup.GroupId = group.GroupId;
             try
             {
-                cmd.ExecuteNonQuery();
-                updatedGroup = group;
+                cmd.ExecuteScalar();
             }
             catch (System.Data.SqlClient.SqlException e)
             {
@@ -178,6 +179,18 @@ namespace Backend_Service
             dbInit();
             cmd.CommandText = "DELETE FROM [Group_Contacts] WHERE Id=@Id";
             cmd.Parameters.AddWithValue("@Id", groupContact.Id);
+            conn.Open();
+            int rowDeleted = cmd.ExecuteNonQuery();
+            conn.Close();
+            if (rowDeleted == 0)
+                return new GroupContact();
+            return groupContact;
+        }
+        public GroupContact DeleteGroupContactByContactId(GroupContact groupContact)
+        {
+            dbInit();
+            cmd.CommandText = "DELETE FROM [Group_Contacts] WHERE ContactId=@ContactId";
+            cmd.Parameters.AddWithValue("@ContactId", groupContact.ContactId);
             conn.Open();
             int rowDeleted = cmd.ExecuteNonQuery();
             conn.Close();

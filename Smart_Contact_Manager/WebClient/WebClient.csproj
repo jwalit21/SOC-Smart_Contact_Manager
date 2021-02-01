@@ -85,6 +85,7 @@
     <None Include="Connected Services\ContactServiceReference\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="AddGroupContacts.aspx" />
     <Content Include="Connected Services\ContactServiceReference\WebClient.ContactServiceReference.Contact.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -114,6 +115,8 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\multiSelect.css" />
     <Content Include="Default.aspx" />
+    <Content Include="DeleteGroup.aspx" />
+    <Content Include="EditGroup.aspx" />
     <Content Include="Global.asax" />
     <Content Include="GroupList.aspx" />
     <Content Include="js\bootstrap.bundle.js" />
@@ -130,6 +133,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddGroupContacts.aspx.cs">
+      <DependentUpon>AddGroupContacts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddGroupContacts.aspx.designer.cs">
+      <DependentUpon>AddGroupContacts.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\AccountServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -151,6 +161,20 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteGroup.aspx.cs">
+      <DependentUpon>DeleteGroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeleteGroup.aspx.designer.cs">
+      <DependentUpon>DeleteGroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditGroup.aspx.cs">
+      <DependentUpon>EditGroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditGroup.aspx.designer.cs">
+      <DependentUpon>EditGroup.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

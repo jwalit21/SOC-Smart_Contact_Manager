@@ -23,7 +23,13 @@ namespace WebClient
             var group = new Group1();
             group.UserId = UserId;
             group.GroupId = GroupId;
+            AddContactLink.NavigateUrl = "AddGroupContacts.aspx?GroupId=" + GroupId;
+            DeleteGroupLink.NavigateUrl = "DeleteGroup.aspx?GroupId=" + GroupId;
             var fetchedGroup = ((IGroupService)proxy).GetGroup(group);
+            if (fetchedGroup.UserId != UserId)
+            {
+                Response.Redirect("~/Login.aspx");
+            }
             GroupName.Text = fetchedGroup.Name;
             GrpDesc.Text = fetchedGroup.Description;
             var groupContacts = ((IGroupService)proxy).GetGroupContacts(GroupId);
@@ -36,17 +42,20 @@ namespace WebClient
                 TableCell ContactId = new TableCell();
                 TableCell PhoneNumber = new TableCell();
                 TableCell button = new TableCell();
+                TableCell removeButton = new TableCell();
                 seqNo.Text = "" + (i + 1);
                 contact.ContactId = groupContacts[i].ContactId;
                 var fetchedContact = ((IContactService)contactProxy).GetContact(contact);
                 ContactId.Text = fetchedContact.Name;
                 PhoneNumber.Text = fetchedContact.PhoneNumber;
                 button.Text = ("<a class='btn btn-primary' href=''>View Contact</a>");
+                removeButton.Text = "<a class='btn btn-danger' onclick='delete'>Delete</a>";
                 TableRow row = new TableRow();
                 row.Cells.Add(seqNo);
                 row.Cells.Add(ContactId);
                 row.Cells.Add(PhoneNumber);
                 row.Cells.Add(button);
+                row.Cells.Add(removeButton);
                 GroupContacList.Rows.Add(row);
             }
         }

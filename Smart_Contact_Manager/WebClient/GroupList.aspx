@@ -12,6 +12,7 @@
                         <asp:TableHeaderCell>Group Name</asp:TableHeaderCell>
                         <asp:TableHeaderCell>Group Description</asp:TableHeaderCell>
                         <asp:TableHeaderCell></asp:TableHeaderCell>
+                        <asp:TableHeaderCell></asp:TableHeaderCell>
                     </asp:TableHeaderRow>
                     
                 </asp:Table>

@@ -35,5 +35,8 @@ namespace Backend_Service
         [OperationContract]
         GroupContact DeleteGroupContact(GroupContact groupContact);
 
+        [OperationContract]
+        GroupContact DeleteGroupContactByContactId(GroupContact groupContact);
+
     }
 }

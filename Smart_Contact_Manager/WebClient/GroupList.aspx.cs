@@ -22,19 +22,23 @@ namespace WebClient
             for(int i = 0; i < groups.Length; i++)
             {
                 var grpUrl = "ViewGroup.aspx?GroupId="+groups[i].GroupId;
+                var editUrl = "EditGroup.aspx?GroupId=" + groups[i].GroupId;
                 TableCell seqNo = new TableCell();
                 TableCell grpName = new TableCell();
                 TableCell grpDesc = new TableCell();
                 TableCell button = new TableCell();
+                TableCell editButton = new TableCell();
                 seqNo.Text = "" + (i+1);
                 grpName.Text = groups[i].Name;
                 grpDesc.Text = groups[i].Description;
-                button.Text = ("<a class='btn btn-primary' href="+grpUrl+">View Group</a>");
+                button.Text = ("<a class='btn btn-primary' href="+grpUrl+">View</a>");
+                editButton.Text = ("<a class='btn btn-secondary' href=" + editUrl + ">Edit</a>");
                 TableRow row = new TableRow();
                 row.Cells.Add(seqNo);
                 row.Cells.Add(grpName);
                 row.Cells.Add(grpDesc);
                 row.Cells.Add(button);
+                row.Cells.Add(editButton);
                 GroupsList.Rows.Add(row);
             }
         }
