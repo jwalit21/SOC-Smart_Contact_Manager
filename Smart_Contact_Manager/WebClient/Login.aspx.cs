@@ -11,7 +11,17 @@ namespace WebClient
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!IsPostBack)
+            {
+                string Success_Message = (string)this.Context.Items["SuccessMessage"];
+                if (Success_Message != "")
+                {
+                    SuccessMessage.Visible = true;
+                    SuccessMessage.Text = Success_Message;
+                    this.Context.Items.Remove("SuccessMessage");
+                    ErrorMessage.Visible = false;
+                }
+            }
         }
 
         protected void SubmitButton_Click1(object sender, EventArgs e)
@@ -23,10 +33,14 @@ namespace WebClient
             WebClient.AccountServiceReference.User fetchedUser = ((AccountServiceReference.IAccountService)proxy).Login(user);
             if (fetchedUser.UserId == 0)
             {
+                SuccessMessage.Visible = false;
+                ErrorMessage.Visible = true;
                 ErrorMessage.Text = "Invalid Email or Password!!!";
                 return;
             }
             Session["UserID"] = fetchedUser.UserId;
+            SuccessMessage.Visible = false;
+            ErrorMessage.Visible = true;
             ErrorMessage.Text = Session["UserID"].ToString();
         }
     }

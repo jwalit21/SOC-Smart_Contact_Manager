@@ -16,10 +16,12 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
+                            <div class="text-success text-center font-weight-bold col-sm-12">
+                                <asp:Label ID="SuccessMessage" runat="server" Text=""></asp:Label>    
+                            </div>    
+
                             <div class="text-danger text-center font-weight-bold col-sm-12">
-                                
-                                <asp:Label ID="ErrorMessage" runat="server" Text=""></asp:Label>
-                                
+                                <asp:Label ID="ErrorMessage" runat="server" Text=""></asp:Label>    
                             </div>
                      </div>
                   <div class="form-group">
@@ -49,7 +51,7 @@
                   </div>
                   <div class="text-block text-center my-3">
                     <span class="text-small font-weight-semibold">Not a member ?</span>
-                    <a href="register.html" class="text-black text-small">Create new account</a>
+                    <a href="/Register.aspx" class="text-black text-small">Create new account</a>
                   </div>
                 </form>
               </div>
