@@ -34,6 +34,10 @@ namespace WebClient
                 {
                     Response.Redirect("~/AccessDenied.aspx");
                 }
+                if(fetchedGroup.GroupId == 0)
+                {
+                    Response.Redirect("~/404.aspx");
+                }
                 Name.Text = fetchedGroup.Name;
                 Description.Text = fetchedGroup.Description;
             }

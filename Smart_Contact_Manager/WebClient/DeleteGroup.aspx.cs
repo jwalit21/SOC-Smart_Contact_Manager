@@ -46,6 +46,10 @@ namespace WebClient
             {
                 Response.Redirect("~/AccessDenied.aspx");
             }
+            if(fetchedGroup.GroupId == 0)
+            {
+                Response.Redirect("~/404.aspx");
+            }
             GrpData.Text = "Name :- " + fetchedGroup.Name + 
                             "<br>Description :- " +fetchedGroup.Description+
                             "<br>Total Contacts :- "+ ((IGroupService)grpProxy).GetGroupContacts(GroupId).Length;

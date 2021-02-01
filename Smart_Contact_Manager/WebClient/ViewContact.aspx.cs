@@ -29,6 +29,10 @@ namespace WebClient
             {
                 Response.Redirect("~/AccessDenied.aspx");
             }
+            if(fetchedContact.ContactId == 0)
+            {
+                Response.Redirect("~/404.aspx");
+            }
             Name.Text = fetchedContact.Name;
             PhoneNumber.Text = fetchedContact.PhoneNumber;
             Description.Text = fetchedContact.Description;

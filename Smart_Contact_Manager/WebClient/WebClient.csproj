@@ -85,6 +85,7 @@
     <None Include="Connected Services\ContactServiceReference\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="404.aspx" />
     <Content Include="AccessDenied.aspx" />
     <Content Include="AddGroupContacts.aspx" />
     <Content Include="Connected Services\ContactServiceReference\WebClient.ContactServiceReference.Contact.datasource">
@@ -146,6 +147,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AccessDenied.aspx.cs">
       <DependentUpon>AccessDenied.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
