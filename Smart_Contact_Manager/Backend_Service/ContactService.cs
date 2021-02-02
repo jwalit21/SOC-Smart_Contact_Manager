@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -147,5 +148,47 @@ namespace Backend_Service
             return newContact; // If Id is not valid then empty object is returned
         }
 
+        public bool UploadToTempFolder(byte[] pFileBytes, string pFileName)
+        {
+            bool isSuccess = false;
+            FileStream fileStream = null;
+            //Get the file upload path store in web services web.config file.  
+            string strTempFolderPath = System.Configuration.ConfigurationManager.AppSettings.Get("FileUploadPath");
+            try
+            {
+
+                if (!string.IsNullOrEmpty(strTempFolderPath))
+                {
+                    if (!string.IsNullOrEmpty(pFileName))
+                    {
+                        string strFileFullPath = strTempFolderPath + pFileName;
+                        fileStream = new FileStream(strFileFullPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                        // write file stream into the specified file  
+                        using (System.IO.FileStream fs = fileStream)
+                        {
+                            fs.Write(pFileBytes, 0, pFileBytes.Length);
+                            isSuccess = true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return isSuccess;
+        }
+
+        public byte[] GetFileFromFolder(string filename)
+        {
+            byte[] filedetails = new byte[0];
+            string strTempFolderPath = System.Configuration.ConfigurationManager.AppSettings.Get("FileUploadPath");
+            if (File.Exists(strTempFolderPath + filename))
+            {
+                return File.ReadAllBytes(strTempFolderPath + filename);
+            }
+            else return filedetails;
+        }
     }
 }
