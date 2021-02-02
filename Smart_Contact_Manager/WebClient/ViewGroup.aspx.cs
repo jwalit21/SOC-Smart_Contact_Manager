@@ -49,7 +49,7 @@ namespace WebClient
                 ContactId.Text = fetchedContact.Name;
                 PhoneNumber.Text = fetchedContact.PhoneNumber;
                 button.Text = ("<a class='btn btn-primary' href=''>View Contact</a>");
-                removeButton.Text = "<a class='btn btn-danger' onclick='delete'>Delete</a>";
+                removeButton.Text = "<a class='btn btn-danger' href='RemoveGroupContact.aspx?Id="+groupContacts[i].Id+"&GroupId="+groupContacts[i].GroupId+"' onclick='remove'>Remove From Group</a>";
                 TableRow row = new TableRow();
                 row.Cells.Add(seqNo);
                 row.Cells.Add(ContactId);
@@ -57,6 +57,7 @@ namespace WebClient
                 row.Cells.Add(button);
                 row.Cells.Add(removeButton);
                 GroupContacList.Rows.Add(row);
+                
             }
         }
     }
