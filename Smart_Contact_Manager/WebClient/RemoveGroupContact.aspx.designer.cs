@@ -7,12 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
-namespace WebClient
-{
-    public partial class RemoveGroupContact
-    {
-
+namespace WebClient {
+    
+    
+    public partial class RemoveGroupContact {
+        
         /// <summary>
         /// form1 control.
         /// </summary>

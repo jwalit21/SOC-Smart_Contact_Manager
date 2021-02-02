@@ -19,19 +19,28 @@ namespace WebClient
         {
             if (Session["UserID"] == null)
             {
-                Response.Redirect("~/Login.aspx");
+                this.Context.Items.Add("ErrorMessage","Access Denied! Please Login");
+                Server.Transfer("~/Login.aspx");
             }
             grpProxy = new GroupServiceClient();
             contactProxy = new ContactServiceClient();
+            if (Request.QueryString["GroupId"] == null)
+            {
+                Response.Redirect("~/404.aspx");
+            }
             GroupId = Int32.Parse(Request.QueryString["GroupId"]);
             UserId = Int32.Parse(Session["UserId"].ToString());
             var group = new Group1();
             group.UserId = UserId;
             group.GroupId = GroupId;
             var fetchedGroup = ((IGroupService)grpProxy).GetGroup(group);
+            if (fetchedGroup.GroupId == 0)
+            {
+                Response.Redirect("~/404.aspx");
+            }
             if (fetchedGroup.UserId != UserId)
             {
-                Response.Redirect("~/Login.aspx");
+                Response.Redirect("~/AccessDenied.aspx");
             }
             GroupName.Text = fetchedGroup.Name;
             var allContacts = ((IContactService)contactProxy).GetContacts(UserId).ToList();

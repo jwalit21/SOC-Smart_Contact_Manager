@@ -14,11 +14,12 @@ namespace WebClient
         {
             if (Session["UserID"] == null)
             {
-                Response.Redirect("~/Login.aspx");
+                this.Context.Items.Add("ErrorMessage", "Access Denied! Please Login");
+                Server.Transfer("~/Login.aspx");
             }
-            if (Request.QueryString["Id"] == null || Request.QueryString["GroupId"]==null)
+            if (Request.QueryString["Id"] == null || Request.QueryString["GroupId"] == null)
             {
-                Response.Redirect("");
+                Response.Redirect("~/404.aspx");
             }
             int Id = Int32.Parse(Request.QueryString["Id"]);
             int GroupId = Int32.Parse(Request.QueryString["GroupId"]);
@@ -26,7 +27,7 @@ namespace WebClient
             var grpContact = new GroupContact1();
             grpContact.Id = Id;
             ((IGroupService)proxy).DeleteGroupContact(grpContact);
-            Response.Redirect("~/ViewGroup.aspx?GroupId="+GroupId);
+            Response.Redirect("~/ViewGroup.aspx?GroupId=" + GroupId);
         }
     }
 }

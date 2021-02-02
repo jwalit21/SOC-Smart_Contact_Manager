@@ -11,7 +11,30 @@ namespace WebClient
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!IsPostBack)
+            {
+                if (Session["UserID"] != null)
+                {
+                    this.Context.Items.Add("ErrorMessage", "Access Denied! Please Login");
+                    Response.Redirect("~/Dashboard.aspx");
+                }
+                string Success_Message = (string)this.Context.Items["SuccessMessage"];
+                string Error_Message = (string)this.Context.Items["ErrorMessage"];
+                if (Success_Message != null)
+                {
+                    SuccessMessage.Visible = true;
+                    SuccessMessage.Text = Success_Message;
+                    this.Context.Items.Remove("SuccessMessage");
+                    ErrorMessage.Visible = false;
+                }
+                if (Error_Message != null)
+                {
+                    ErrorMessage.Visible = true;
+                    ErrorMessage.Text = Error_Message;
+                    this.Context.Items.Remove("ErrorMessage");
+                    SuccessMessage.Visible = false;
+                }
+            }
         }
 
         protected void SubmitButton_Click1(object sender, EventArgs e)
@@ -23,11 +46,13 @@ namespace WebClient
             WebClient.AccountServiceReference.User fetchedUser = ((AccountServiceReference.IAccountService)proxy).Login(user);
             if (fetchedUser.UserId == 0)
             {
+                SuccessMessage.Visible = false;
+                ErrorMessage.Visible = true;
                 ErrorMessage.Text = "Invalid Email or Password!!!";
                 return;
             }
             Session["UserID"] = fetchedUser.UserId;
-            ErrorMessage.Text = Session["UserID"].ToString();
+            Response.Redirect("~/Dashboard.aspx");
         }
     }
 }

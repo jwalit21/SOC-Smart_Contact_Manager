@@ -11,7 +11,21 @@ namespace WebClient
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserID"] == null)
+            {
+                ViewState["isLoggedIn"] = false;
+            }
+            else
+            {
+                ViewState["isLoggedIn"] = true;
+            }
+        }
 
+        protected void LogoutButton_Click(object sender, EventArgs e)
+        {
+            Session.Remove("UserID");
+            //this.Context.Items.Add("SuccessMessage", "Logged out Successfully..!");
+            Response.Redirect("~/Login.aspx");
         }
     }
 }

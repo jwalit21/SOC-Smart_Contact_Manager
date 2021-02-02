@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -64,11 +67,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\AccountServiceReference\AccountService.wsdl" />
     <None Include="Connected Services\AccountServiceReference\item.disco" />
     <None Include="Connected Services\AccountServiceReference\configuration91.svcinfo" />
@@ -87,6 +85,8 @@
     <None Include="Connected Services\ContactServiceReference\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="404.aspx" />
+    <Content Include="AccessDenied.aspx" />
     <Content Include="AddGroupContacts.aspx" />
     <Content Include="Connected Services\ContactServiceReference\WebClient.ContactServiceReference.Contact.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -109,6 +109,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="ContactList.aspx" />
     <Content Include="css\bootstrap-grid.css" />
     <Content Include="css\bootstrap-grid.min.css" />
     <Content Include="css\bootstrap-reboot.css" />
@@ -116,11 +117,16 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\multiSelect.css" />
+    <Content Include="Dashboard.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="DeleteContact.aspx" />
     <Content Include="DeleteGroup.aspx" />
+    <Content Include="EditContact.aspx" />
     <Content Include="EditGroup.aspx" />
     <Content Include="Global.asax" />
     <Content Include="GroupList.aspx" />
+    <Content Include="images\404_Error.jpg" />
+    <Content Include="images\accessDenied.png" />
     <Content Include="js\bootstrap.bundle.js" />
     <Content Include="js\bootstrap.bundle.min.js" />
     <Content Include="js\bootstrap.js" />
@@ -129,12 +135,36 @@
     <Content Include="js\multipleSelect.js" />
     <Content Include="js\popper.min.js" />
     <Content Include="Login.aspx" />
+    <Content Include="Logout.aspx" />
+    <Content Include="NewContact.aspx" />
     <Content Include="NewGroup.aspx" />
+    <Content Include="Register.aspx" />
     <Content Include="RemoveGroupContact.aspx" />
+    <Content Include="ViewContact.aspx" />
     <Content Include="ViewGroup.aspx" />
     <Content Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AccessDenied.aspx.cs">
+      <DependentUpon>AccessDenied.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccessDenied.aspx.designer.cs">
+      <DependentUpon>AccessDenied.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddGroupContacts.aspx.cs">
       <DependentUpon>AddGroupContacts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -157,6 +187,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ContactList.aspx.cs">
+      <DependentUpon>ContactList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContactList.aspx.designer.cs">
+      <DependentUpon>ContactList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -164,12 +208,26 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DeleteContact.aspx.cs">
+      <DependentUpon>DeleteContact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeleteContact.aspx.designer.cs">
+      <DependentUpon>DeleteContact.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DeleteGroup.aspx.cs">
       <DependentUpon>DeleteGroup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DeleteGroup.aspx.designer.cs">
       <DependentUpon>DeleteGroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditContact.aspx.cs">
+      <DependentUpon>EditContact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditContact.aspx.designer.cs">
+      <DependentUpon>EditContact.aspx</DependentUpon>
     </Compile>
     <Compile Include="EditGroup.aspx.cs">
       <DependentUpon>EditGroup.aspx</DependentUpon>
@@ -195,6 +253,20 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewContact.aspx.cs">
+      <DependentUpon>NewContact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewContact.aspx.designer.cs">
+      <DependentUpon>NewContact.aspx</DependentUpon>
+    </Compile>
     <Compile Include="NewGroup.aspx.cs">
       <DependentUpon>NewGroup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -203,6 +275,13 @@
       <DependentUpon>NewGroup.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
     <Compile Include="RemoveGroupContact.aspx.cs">
       <DependentUpon>RemoveGroupContact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -216,6 +295,13 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ViewContact.aspx.cs">
+      <DependentUpon>ViewContact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewContact.aspx.designer.cs">
+      <DependentUpon>ViewContact.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewGroup.aspx.cs">
       <DependentUpon>ViewGroup.aspx</DependentUpon>
@@ -266,14 +352,8 @@
     <Content Include="Connected Services\GroupServiceReference\WebClient.GroupServiceReference.GroupContact1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="packages.config" />
     <Content Include="Site.Master" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
