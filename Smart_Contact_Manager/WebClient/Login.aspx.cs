@@ -9,6 +9,7 @@ namespace WebClient
 {
     public partial class Login : System.Web.UI.Page
     {
+        WebClient.AccountServiceReference.AccountServiceClient proxy;
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
@@ -39,20 +40,28 @@ namespace WebClient
 
         protected void SubmitButton_Click1(object sender, EventArgs e)
         {
-            WebClient.AccountServiceReference.AccountServiceClient proxy = new AccountServiceReference.AccountServiceClient("BasicHttpBinding_IAccountService");
-            AccountServiceReference.User user = new WebClient.AccountServiceReference.User();
-            user.Email = Email.Text;
-            user.Password = Password.Text;
-            WebClient.AccountServiceReference.User fetchedUser = ((AccountServiceReference.IAccountService)proxy).Login(user);
-            if (fetchedUser.UserId == 0)
+            try
             {
-                SuccessMessage.Visible = false;
-                ErrorMessage.Visible = true;
-                ErrorMessage.Text = "Invalid Email or Password!!!";
-                return;
+                proxy = new AccountServiceReference.AccountServiceClient("BasicHttpBinding_IAccountService");
+                AccountServiceReference.User user = new WebClient.AccountServiceReference.User();
+                user.Email = Email.Text;
+                user.Password = Password.Text;
+                WebClient.AccountServiceReference.User fetchedUser = ((AccountServiceReference.IAccountService)proxy).Login(user);
+                if (fetchedUser.UserId == 0)
+                {
+                    SuccessMessage.Visible = false;
+                    ErrorMessage.Visible = true;
+                    ErrorMessage.Text = "Invalid Email or Password!!!";
+                    return;
+                }
+                Session["UserID"] = fetchedUser.UserId;
+                Response.Redirect("~/Dashboard.aspx");
             }
-            Session["UserID"] = fetchedUser.UserId;
-            Response.Redirect("~/Dashboard.aspx");
+            catch (System.ServiceModel.CommunicationException)
+            {
+                proxy = new AccountServiceReference.AccountServiceClient("BasicHttpBinding_IAccountService");
+                Server.Transfer("~/Dashboard.aspx");
+            }
         }
     }
 }

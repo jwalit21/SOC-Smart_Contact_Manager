@@ -17,69 +17,86 @@ namespace WebClient
         int UserId;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserID"] == null)
+            try
             {
-                this.Context.Items.Add("ErrorMessage","Access Denied! Please Login");
-                Server.Transfer("~/Login.aspx");
-            }
-            grpProxy = new GroupServiceClient();
-            contactProxy = new ContactServiceClient();
-            if (Request.QueryString["GroupId"] == null)
-            {
-                Response.Redirect("~/404.aspx");
-            }
-            GroupId = Int32.Parse(Request.QueryString["GroupId"]);
-            UserId = Int32.Parse(Session["UserId"].ToString());
-            var group = new Group1();
-            group.UserId = UserId;
-            group.GroupId = GroupId;
-            var fetchedGroup = ((IGroupService)grpProxy).GetGroup(group);
-            if (fetchedGroup.GroupId == 0)
-            {
-                Response.Redirect("~/404.aspx");
-            }
-            if (fetchedGroup.UserId != UserId)
-            {
-                Response.Redirect("~/AccessDenied.aspx");
-            }
-            GroupName.Text = fetchedGroup.Name;
-            var allContacts = ((IContactService)contactProxy).GetContacts(UserId).ToList();
-            var grpContacts = ((IGroupService)grpProxy).GetGroupContacts(GroupId).ToList();
-
-            foreach (var contact in allContacts)
-            {
-                bool isInGroup = false;
-                foreach (var grpContact in grpContacts)
+                if (Session["UserID"] == null)
                 {
-                    if (grpContact.ContactId == contact.ContactId)
+                    this.Context.Items.Add("ErrorMessage", "Access Denied! Please Login");
+                    Server.Transfer("~/Login.aspx");
+                }
+                grpProxy = new GroupServiceClient();
+                contactProxy = new ContactServiceClient();
+                if (Request.QueryString["GroupId"] == null)
+                {
+                    Response.Redirect("~/404.aspx");
+                }
+                GroupId = Int32.Parse(Request.QueryString["GroupId"]);
+                UserId = Int32.Parse(Session["UserId"].ToString());
+                var group = new Group1();
+                group.UserId = UserId;
+                group.GroupId = GroupId;
+                var fetchedGroup = ((IGroupService)grpProxy).GetGroup(group);
+                if (fetchedGroup.GroupId == 0)
+                {
+                    Response.Redirect("~/404.aspx");
+                }
+                if (fetchedGroup.UserId != UserId)
+                {
+                    Response.Redirect("~/AccessDenied.aspx");
+                }
+                GroupName.Text = fetchedGroup.Name;
+                var allContacts = ((IContactService)contactProxy).GetContacts(UserId).ToList();
+                var grpContacts = ((IGroupService)grpProxy).GetGroupContacts(GroupId).ToList();
+
+                foreach (var contact in allContacts)
+                {
+                    bool isInGroup = false;
+                    foreach (var grpContact in grpContacts)
                     {
-                        isInGroup = true;
-                        break;
+                        if (grpContact.ContactId == contact.ContactId)
+                        {
+                            isInGroup = true;
+                            break;
+                        }
+                    }
+                    if (!isInGroup)
+                    {
+                        var contactToAdd = new ListItem();
+                        contactToAdd.Value = contact.ContactId.ToString();
+                        contactToAdd.Text = contact.Name;
+                        GroupContacts.Items.Add(contactToAdd);
                     }
                 }
-                if (!isInGroup)
-                {
-                    var contactToAdd = new ListItem();
-                    contactToAdd.Value = contact.ContactId.ToString();
-                    contactToAdd.Text = contact.Name;
-                    GroupContacts.Items.Add(contactToAdd);
-                }
+            }
+            catch(System.ServiceModel.CommunicationException)
+            {
+                grpProxy = new GroupServiceClient();
+                contactProxy = new ContactServiceClient();
+                Server.Transfer("~/Dashboard.aspx");
             }
         }
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
-            foreach(ListItem grpContact in GroupContacts.Items)
+            try
             {
-                if (grpContact.Selected)
+                foreach (ListItem grpContact in GroupContacts.Items)
                 {
-                    var grpContactToAdd = new GroupContact1();
-                    grpContactToAdd.ContactId = Int32.Parse(grpContact.Value);
-                    grpContactToAdd.GroupId = GroupId;
-                    ((IGroupService)grpProxy).AddGroupContract(grpContactToAdd);
+                    if (grpContact.Selected)
+                    {
+                        var grpContactToAdd = new GroupContact1();
+                        grpContactToAdd.ContactId = Int32.Parse(grpContact.Value);
+                        grpContactToAdd.GroupId = GroupId;
+                        ((IGroupService)grpProxy).AddGroupContract(grpContactToAdd);
+                    }
                 }
+                Response.Redirect("~/ViewGroup.aspx?GroupId=" + GroupId);
             }
-            Response.Redirect("~/ViewGroup.aspx?GroupId=" + GroupId);
+            catch (System.ServiceModel.CommunicationException)
+            {
+                grpProxy = new GroupServiceClient();
+                Server.Transfer("~/Dashboard.aspx");
+            }
         }
     }
 }

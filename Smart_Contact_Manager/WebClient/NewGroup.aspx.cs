@@ -10,6 +10,7 @@ namespace WebClient
 {
     public partial class NewGroup : System.Web.UI.Page
     {
+        GroupServiceClient proxy;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserID"] == null)
@@ -21,18 +22,26 @@ namespace WebClient
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
-            GroupServiceReference.GroupServiceClient proxy = new GroupServiceReference.GroupServiceClient();
-            Group1 group = new Group1();
-            group.Name = Name.Text;
-            group.Description = Description.Text;
-            group.UserId = Int32.Parse(Session["UserId"].ToString());
-            var fetchedGroup = ((IGroupService)proxy).AddGroup(group);
-            if (fetchedGroup.GroupId == -1)
+            try
             {
-                ErrorMessage.Text = "Group Name is already Used";
-                return;
+                proxy = new GroupServiceReference.GroupServiceClient();
+                Group1 group = new Group1();
+                group.Name = Name.Text;
+                group.Description = Description.Text;
+                group.UserId = Int32.Parse(Session["UserId"].ToString());
+                var fetchedGroup = ((IGroupService)proxy).AddGroup(group);
+                if (fetchedGroup.GroupId == -1)
+                {
+                    ErrorMessage.Text = "Group Name is already Used";
+                    return;
+                }
+                Response.Redirect("GroupList.aspx");
             }
-            Response.Redirect("GroupList.aspx");
+            catch (System.ServiceModel.CommunicationException)
+            {
+                proxy = new GroupServiceClient();
+                Server.Transfer("~/Dashboard.aspx");
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ namespace WebClient
 {
     public partial class NewContact : System.Web.UI.Page
     {
+        ContactServiceClient proxy;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserID"] == null)
@@ -21,21 +22,29 @@ namespace WebClient
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
-            ContactServiceReference.ContactServiceClient proxy = new ContactServiceReference.ContactServiceClient();
-            Contact1 contact = new Contact1();
-            contact.Email = Email.Text;
-            contact.Name = Name.Text;
-            contact.PhoneNumber = PhoneNumber.Text;
-            contact.Description = Description.Text;
-            contact.PhotoPath = "";
-            contact.UserId = Int32.Parse(Session["UserId"].ToString());
-            var fetchedContact = ((IContactService)proxy).AddContact(contact);
-            if (fetchedContact.UserId == 0)
+            try
             {
-                ErrorMessage.Text = "Contact number is already added";
-                return;
+                proxy = new ContactServiceReference.ContactServiceClient();
+                Contact1 contact = new Contact1();
+                contact.Email = Email.Text;
+                contact.Name = Name.Text;
+                contact.PhoneNumber = PhoneNumber.Text;
+                contact.Description = Description.Text;
+                contact.PhotoPath = "";
+                contact.UserId = Int32.Parse(Session["UserId"].ToString());
+                var fetchedContact = ((IContactService)proxy).AddContact(contact);
+                if (fetchedContact.UserId == 0)
+                {
+                    ErrorMessage.Text = "Contact number is already added";
+                    return;
+                }
+                Response.Redirect("ContactList.aspx");
             }
-            Response.Redirect("ContactList.aspx");
+            catch (System.ServiceModel.CommunicationException)
+            {
+                proxy = new ContactServiceClient();
+                Server.Transfer("~/Dashboard.aspx");
+            }
         }
     }
 }
