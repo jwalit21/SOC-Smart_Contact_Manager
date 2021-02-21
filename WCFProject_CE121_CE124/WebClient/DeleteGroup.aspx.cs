@@ -14,13 +14,21 @@ namespace WebClient
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
-            var grp = new Group1();
-            grp.GroupId = GroupId;
-            var grpContact = new GroupContact1();
-            grpContact.GroupId = GroupId;
-            ((IGroupService)grpProxy).DeleteGroupContactByGroupId(grpContact);
-            ((IGroupService)grpProxy).DeleteGroup(grp);
-            Response.Redirect("~/GroupList.aspx");
+            try
+            {
+                var grp = new Group1();
+                grp.GroupId = GroupId;
+                var grpContact = new GroupContact1();
+                grpContact.GroupId = GroupId;
+                ((IGroupService)grpProxy).DeleteGroupContactByGroupId(grpContact);
+                ((IGroupService)grpProxy).DeleteGroup(grp);
+                Response.Redirect("~/GroupList.aspx");
+            }
+            catch (System.ServiceModel.CommunicationException)
+            {
+                grpProxy = new GroupServiceClient();
+                Server.Transfer("~/Dashboard.aspx");
+            }
         }
 
         protected void CancelButton_Click(object sender, EventArgs e)
@@ -30,35 +38,43 @@ namespace WebClient
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserID"] == null)
+            try
             {
-                this.Context.Items.Add("ErrorMessage", "Access Denied! Please Login");
-                Server.Transfer("~/Login.aspx");
-            }
-            grpProxy = new GroupServiceClient();
-            if (Request.QueryString["GroupId"] == null)
-            {
-                Response.Redirect("~/404.aspx");
-            }
-            GroupId = Int32.Parse(Request.QueryString["GroupId"]);
-            
-            UserId = Int32.Parse(Session["UserId"].ToString());
-            var group = new Group1();
-            group.UserId = UserId;
-            group.GroupId = GroupId;
-            var fetchedGroup = ((IGroupService)grpProxy).GetGroup(group);
+                if (Session["UserID"] == null)
+                {
+                    this.Context.Items.Add("ErrorMessage", "Access Denied! Please Login");
+                    Server.Transfer("~/Login.aspx");
+                }
+                grpProxy = new GroupServiceClient();
+                if (Request.QueryString["GroupId"] == null)
+                {
+                    Response.Redirect("~/404.aspx");
+                }
+                GroupId = Int32.Parse(Request.QueryString["GroupId"]);
 
-            if (fetchedGroup.GroupId == 0)
-            {
-                Response.Redirect("~/404.aspx");
+                UserId = Int32.Parse(Session["UserId"].ToString());
+                var group = new Group1();
+                group.UserId = UserId;
+                group.GroupId = GroupId;
+                var fetchedGroup = ((IGroupService)grpProxy).GetGroup(group);
+
+                if (fetchedGroup.GroupId == 0)
+                {
+                    Response.Redirect("~/404.aspx");
+                }
+                if (fetchedGroup.UserId != UserId)
+                {
+                    Response.Redirect("~/AccessDenied.aspx");
+                }
+                GrpData.Text = "Name :- " + fetchedGroup.Name +
+                                "<br>Description :- " + fetchedGroup.Description +
+                                "<br>Total Contacts :- " + ((IGroupService)grpProxy).GetGroupContacts(GroupId).Length;
             }
-            if (fetchedGroup.UserId != UserId)
+            catch (System.ServiceModel.CommunicationException)
             {
-                Response.Redirect("~/AccessDenied.aspx");
+                grpProxy = new GroupServiceClient();
+                Server.Transfer("~/Dashboard.aspx");
             }
-            GrpData.Text = "Name :- " + fetchedGroup.Name + 
-                            "<br>Description :- " +fetchedGroup.Description+
-                            "<br>Total Contacts :- "+ ((IGroupService)grpProxy).GetGroupContacts(GroupId).Length;
         }
     }
 }
