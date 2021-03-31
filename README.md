@@ -23,5 +23,5 @@ functionalities & get benefits of the provided features.
 ### Tools
 > - Visual Studio
 
-
-Developed by : Jwalit Shah and Mahammadayan Shaikh
+<br>
+<b>Design & Developed by : <span style="color:red">Jwalit Shah and Mahammadayan Shaikh</span></b>
